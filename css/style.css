@@ -11,6 +11,8 @@
     --light-grey: hsl(190, 10%, 50%);
     --lightest-grey: hsl(190, 10%, 80%);
 
+    --background-grey: hsl(190, 10%, 95%);
+
     --darkest-primary: hsl(190, 72%, 20%);
     --dark-primary: hsl(190, 72%, 30%);
     --primary: hsl(190, 72%, 48%);
@@ -29,6 +31,10 @@
     --larger-2: 42px;
     --larger-3: 68px;
     --largest: 110px;  
+}
+
+body {
+    background-color: var(--background-grey);
 }
 
 main {
@@ -63,11 +69,11 @@ main {
 }
 
 .first-row, .second-row {
-    border-bottom: 2px solid var(--darkest-grey);
+    border-bottom: 2px solid var(--dark-grey);
 }
 
 .first-column, .second-column {
-    border-right: 2px solid var(--darkest-grey);
+    border-right: 2px solid var(--dark-grey);
 }
 
 .square:hover {
