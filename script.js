@@ -112,7 +112,10 @@ const gameBoard = (() => {
             let index = Array.from(squares).indexOf(event.target);
             let [y, x] = convertToCoordinates(index);
 
-            board[y][x] = currentTurn;
+            if (board[y][x] != "") {
+                // TODO: Throw error for clicking on existing space
+            }
+            else board[y][x] = currentTurn;
 
             if (evaluateWins() != undefined) {
                 clearBoard();
