@@ -21,7 +21,19 @@ const gameBoard = (() => {
     const drawBoard = () => {
         for (let y = 0; y < board.length; y++) {
             for (let x = 0; x < board[y].length; x++) {
-                squares[convertFromCoordinates([y, x])].classList.toggle(board[y][x]);
+                let boardValue = board[y][x];
+                let square = squares[convertFromCoordinates([y, x])];
+                let classList = Array.from(square.classList);
+
+                if (boardValue == "") {
+                    ["cross", "naught"].forEach(icon => {
+                        if (classList.includes(icon)) {
+                            square.classList.toggle(icon);
+                        }
+                    })
+                }
+                
+                else square.classList.toggle(boardValue);
             }
         }
     }
@@ -79,6 +91,16 @@ const gameBoard = (() => {
         }
     }
 
+    const clearBoard = () => {
+        board = [
+            ["","",""],
+            ["","",""],
+            ["","",""]
+        ];
+
+        drawBoard();
+    }
+
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
             event.target.classList.toggle(currentTurn);
@@ -89,7 +111,7 @@ const gameBoard = (() => {
             board[y][x] = currentTurn;
 
             if (evaluateWins() != undefined) {
-                
+                clearBoard();
             }
 
             toggleTurn();
@@ -97,6 +119,6 @@ const gameBoard = (() => {
     })
 
     return {
-        drawBoard, evaluateWins, board
+        drawBoard, evaluateWins, clearBoard
     }
 })();
