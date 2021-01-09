@@ -35,8 +35,10 @@ const gameBoard = (() => {
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
             event.target.classList.toggle(currentTurn);
+
             let index = Array.from(squares).indexOf(event.target);
             let [y, x] = convertToCoordinates(index);
+            
             board[y][x] = currentTurn;
             toggleTurn();
         })
