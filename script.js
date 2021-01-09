@@ -1,3 +1,7 @@
+const userInterface = (() => {
+
+})();
+
 const gameBoard = (() => {
     let board = [
         ["","",""],
@@ -32,7 +36,7 @@ const gameBoard = (() => {
                         }
                     })
                 }
-                
+
                 else square.classList.toggle(boardValue);
             }
         }
