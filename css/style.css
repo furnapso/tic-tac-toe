@@ -66,6 +66,7 @@ main {
     height: 100%;
     width: 33.33%;
     transition: background-color 200ms;
+    background-size: cover;
 }
 
 .first-row, .second-row {
@@ -79,4 +80,12 @@ main {
 .square:hover {
     background-color: var(--lightest-grey);
     cursor: pointer;
+}
+
+.cross {
+    background-image: url("../images/cross.svg");
+}
+
+.naught {
+    background-image: url("../images/naught.svg");
 }
