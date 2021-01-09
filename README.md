@@ -6,4 +6,4 @@ Assignment for [The Odin Project](https://www.theodinproject.com) - Tic-Tac-Toe
 * HTML
 * Javascript
 * CSS
-* [Skeleton](http://getskeleton.com/)
+* [marx.css](https://mblode.github.io/marx/)
