@@ -26,10 +26,19 @@ const gameBoard = (() => {
         }
     }
 
+    let currentTurn = "cross";
+
+    const toggleTurn = () => {
+        currentTurn = (currentTurn == "cross") ? "naught" : "cross";
+    }
+
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
-            // TODO: Add board update logic
-            console.log(Array.from(squares).indexOf(event.target));
+            event.target.classList.toggle(currentTurn);
+            let index = Array.from(squares).indexOf(event.target);
+            let [y, x] = convertToCoordinates(index);
+            board[y][x] = currentTurn;
+            toggleTurn();
         })
     })
 
