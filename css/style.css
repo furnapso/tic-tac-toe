@@ -40,16 +40,16 @@ body {
 main {
     max-width: 1440px;
     max-height: 900px;
-    min-height: 800px;
-    min-width: 1280px;
+    min-height: 700px;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: none;
 }
 
 .container {
-    height: 600px;
-    width: 600px;
+    height: 20em;
+    width: 20em;
     display: flex;
     justify-content: center;
     align-items: center;
