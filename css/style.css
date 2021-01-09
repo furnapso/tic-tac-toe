@@ -1,0 +1,74 @@
+/* Reset */
+* {box-sizing: border-box;}
+
+/* Design system */
+
+:root {
+    /* Colors */
+    --darkest-grey: hsl(192, 10%, 10%);
+    --dark-grey: hsl(192, 10%, 20%);
+    --grey: hsl(190, 20%, 30%);
+    --light-grey: hsl(190, 10%, 50%);
+    --lightest-grey: hsl(190, 10%, 80%);
+
+    --darkest-primary: hsl(190, 72%, 20%);
+    --dark-primary: hsl(190, 72%, 30%);
+    --primary: hsl(190, 72%, 48%);
+    --light-primary: hsl(190, 72%, 60%);
+    --lightest-primary: hsl(190, 72%, 80%);
+
+    --darkest-accent: hsl(79, 50%, 25%);
+    --dark-accent: hsl(79, 50%, 50%);
+    --accent: hsl(79, 50%, 75%);
+    --light-accent: hsl(79, 50%, 85%);
+    --lightest-accent: hsl(79, 50%, 95%);
+
+    /* Font size */
+    --base: 16px;
+    --larger-1: 26px;
+    --larger-2: 42px;
+    --larger-3: 68px;
+    --largest: 110px;  
+}
+
+main {
+    width: 1440px;
+    height: 900px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    height: 600px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.row {
+    width: 100%;
+    height: 33.33%;
+    display: flex;
+}
+
+.square {
+    height: 100%;
+    width: 33.33%;
+    transition: background-color 200ms;
+}
+
+.first-row, .second-row {
+    border-bottom: 2px solid var(--darkest-grey);
+}
+
+.first-column, .second-column {
+    border-right: 2px solid var(--darkest-grey);
+}
+
+.square:hover {
+    background-color: var(--lightest-grey);
+    cursor: pointer;
+}
