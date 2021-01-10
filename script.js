@@ -135,21 +135,22 @@ const gameBoard = (() => {
 
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
-            event.target.classList.toggle(currentTurn);
-
             let index = Array.from(squares).indexOf(event.target);
             let [y, x] = convertToCoordinates(index);
 
             if (board[y][x] != "") {
+                alert("Error");
                 // TODO: Throw error for clicking on existing space
             }
-            else board[y][x] = currentTurn;
+            else {
+                board[y][x] = currentTurn;
+                event.target.classList.toggle(currentTurn);
+                toggleTurn();
+            }
 
             if (evaluateWins() != undefined) {
                 clearBoard();
             }
-
-            toggleTurn();
         })
     })
 

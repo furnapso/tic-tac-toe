@@ -88,7 +88,7 @@ h1 {
 .square {
     height: 100%;
     width: 33.33%;
-    transition: all 200ms;
+    transition: all 2s;
     background-size: cover;
 }
 
