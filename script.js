@@ -1,5 +1,18 @@
 const userInterface = (() => {
+    const turnIdentifier = document.querySelector(".turn-identifier");
 
+    const updateTurnIdentifier = () => {
+        const turnIdenfierImage = turnIdentifier.querySelector("img")
+        const currentTurnImage = turnIdenfierImage["src"].split("/").slice(-1);
+        const newTurnImage = (currentTurnImage == "cross.svg") ? "naught.svg" : "cross.svg";
+        const newTurnImageUrl = "images/" + newTurnImage;
+
+        turnIdenfierImage["src"] = newTurnImageUrl;
+    }
+
+    return {
+        updateTurnIdentifier
+    }
 })();
 
 const gameBoard = (() => {
@@ -46,6 +59,7 @@ const gameBoard = (() => {
 
     const toggleTurn = () => {
         currentTurn = (currentTurn == "cross") ? "naught" : "cross";
+        userInterface.updateTurnIdentifier();
     }
 
     const evaluateWins = () => {
