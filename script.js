@@ -98,9 +98,9 @@ const gameBoard = (() => {
 
     const evaluateWinner = () => {
         // Horizontal wins
-        board.forEach(row => {
-            if (row.every(val => (val === row[0] && row[0] != ""))) return row[0]
-        })
+        for (let i = 0; i <board[0].length; i++) {
+            if (board[i].every(val => val == board[i][0] && board[i][0] != "")) return board[i][0];
+        }
 
         // Vertical wins
         for (let i = 0; i < board[0].length; i++) {
@@ -197,7 +197,7 @@ const gameBoard = (() => {
     })
 
     return {
-        drawBoard, evaluateWins: evaluateWinner, clearBoard, resetGame, getCurrentTurn
+        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, board
     }
 })();
 
