@@ -4,11 +4,16 @@ const userInterface = (() => {
     const updateTurnIdentifier = () => {
         const turnIdenfierImage = turnIdentifier.querySelector("img")
         const currentTurnImage = turnIdenfierImage["src"].split("/").slice(-1);
-        const newTurnImage = (currentTurnImage == "cross.svg") ? "naught.svg" : "cross.svg";
+        const newTurnImage = gameBoard.getCurrentTurn() + ".svg";
         const newTurnImageUrl = "images/" + newTurnImage;
 
         turnIdenfierImage["src"] = newTurnImageUrl;
     }
+
+    document.querySelector('#reset').addEventListener("click", event => {
+        gameBoard.resetGame();
+        updateTurnIdentifier();
+    })
 
     return {
         updateTurnIdentifier
@@ -119,6 +124,15 @@ const gameBoard = (() => {
         drawBoard();
     }
 
+    const resetGame = () => {
+        clearBoard();
+        currentTurn = "cross";
+    }
+
+    const getCurrentTurn = () => {
+        return currentTurn;
+    }
+
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
             event.target.classList.toggle(currentTurn);
@@ -140,6 +154,6 @@ const gameBoard = (() => {
     })
 
     return {
-        drawBoard, evaluateWins, clearBoard
+        drawBoard, evaluateWins, clearBoard, resetGame, getCurrentTurn
     }
 })();
