@@ -164,7 +164,7 @@ const gameBoard = (() => {
 
     const resetGame = () => {
         clearBoard();
-        currentTurn = "cross";
+        updateTurn("cross");
     }
 
     const getCurrentTurn = () => {
@@ -190,14 +190,16 @@ const gameBoard = (() => {
 
             if (winner != undefined) {
                 if (winner == "Tie") userInterface.showMessage(`It's a tie!`);
+
                 else userInterface.showMessage(`${toProperCase(winner)} has won!`);
+
                 resetGame();
             }
         })
     })
 
     return {
-        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, board
+        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn
     }
 })();
 
