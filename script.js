@@ -1,3 +1,12 @@
+function toProperCase(string) {
+    let strSplit = string.toLowerCase().split(" ");
+    for (let i = 0; i < strSplit.length; i++) {
+        strSplit[i] = strSplit[i].charAt(0).toUpperCase() + strSplit[i].slice(1);
+    }
+
+    return strSplit.join(" ");
+}
+
 const userInterface = (() => {
     const turnIdentifier = document.querySelector(".turn-identifier");
 
@@ -10,12 +19,15 @@ const userInterface = (() => {
         turnIdenfierImage["src"] = newTurnImageUrl;
     }
 
-    const raiseError = (error) => {
+    const showMessage = (message, isError) => {
         const messageDiv = document.querySelector("p.message");
-        messageDiv.textContent = error;
-        messageDiv.classList.add("error-active");
+        messageDiv.textContent = message;
+
+        let messageClass = (isError != undefined && isError) ? "error-active" : "message-active";
+
+        messageDiv.classList.add(messageClass);
         setTimeout(() => {
-            messageDiv.classList.remove("error-active");
+            messageDiv.classList.remove(messageClass);
             setTimeout(() => {
                 messageDiv.textContent = "";
             }, 200)
@@ -28,7 +40,7 @@ const userInterface = (() => {
     })
 
     return {
-        updateTurnIdentifier, raiseError
+        updateTurnIdentifier, showMessage
     }
 })();
 
@@ -74,8 +86,13 @@ const gameBoard = (() => {
 
     let currentTurn = "cross";
 
-    const toggleTurn = () => {
-        currentTurn = (currentTurn == "cross") ? "naught" : "cross";
+    const updateTurn = (newTurn) => {
+        if (newTurn == undefined) {
+            currentTurn = (currentTurn == "cross") ? "naught" : "cross";
+        }
+
+        else if (["cross", "naught"].includes(newTurn)) currentTurn = newTurn;
+        
         userInterface.updateTurnIdentifier();
     }
 
@@ -145,22 +162,26 @@ const gameBoard = (() => {
         return currentTurn;
     }
 
+    // Square click event
     squares.forEach(square => {
         square.addEventListener('click', (event) => {
             let index = Array.from(squares).indexOf(event.target);
             let [y, x] = convertToCoordinates(index);
 
             if (board[y][x] != "") {
-                userInterface.raiseError("Invalid selection");
+                userInterface.showMessage("Invalid selection", true);
             }
             else {
                 board[y][x] = currentTurn;
                 event.target.classList.toggle(currentTurn);
-                toggleTurn();
+                updateTurn();
             }
+            
+            const winner = evaluateWins();
 
-            if (evaluateWins() != undefined) {
-                clearBoard();
+            if (winner != undefined) {
+                userInterface.showMessage(`${toProperCase(winner)} has won!`)
+                resetGame();
             }
         })
     })
