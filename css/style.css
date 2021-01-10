@@ -25,6 +25,10 @@
     --light-accent: hsl(79, 50%, 85%);
     --lightest-accent: hsl(79, 50%, 95%);
 
+    --dark-alert: hsl(7, 90%, 57%);
+    -alert: hsl(7, 90%, 65%);
+    --light-alert: hsl(7, 88%, 90%);
+
     /* Font size */
     --base: 16px;
     --larger-1: 26px;
@@ -67,6 +71,28 @@ h1 {
 
 .turn-identifier {
     font-size: var(--larger-1);
+}
+
+.error {
+    height: 24px;
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+.error-active {
+    border-radius: 4px;
+    padding: 8px 16px 8px 16px;
+    border: 1px solid var(--dark-alert);
+    background-color: var(--light-alert);
+    opacity: 1;
+}
+
+.ui-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 164px;
 }
 
 /* Game grid */
