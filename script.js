@@ -96,7 +96,7 @@ const gameBoard = (() => {
         userInterface.updateTurnIdentifier();
     }
 
-    const evaluateWins = () => {
+    const evaluateWinner = () => {
         // Horizontal wins
         board.forEach(row => {
             if (row.every(val => (val === row[0] && row[0] != ""))) return row[0]
@@ -141,6 +141,15 @@ const gameBoard = (() => {
         if (rightDiagonalResults.every(val => (val === rightDiagonalResults[0] && rightDiagonalResults[0] != ""))) {
             return rightDiagonalResults[0]
         }
+
+        // Tie
+        if (board.every(row => {
+            return row.every(square => {
+                return square != "";
+            })
+        })) {
+            return "Tie";
+        }
     }
 
     const clearBoard = () => {
@@ -177,16 +186,21 @@ const gameBoard = (() => {
                 updateTurn();
             }
             
-            const winner = evaluateWins();
+            const winner = evaluateWinner();
 
             if (winner != undefined) {
-                userInterface.showMessage(`${toProperCase(winner)} has won!`)
+                if (winner == "Tie") userInterface.showMessage(`It's a tie!`);
+                else userInterface.showMessage(`${toProperCase(winner)} has won!`);
                 resetGame();
             }
         })
     })
 
     return {
-        drawBoard, evaluateWins, clearBoard, resetGame, getCurrentTurn
+        drawBoard, evaluateWins: evaluateWinner, clearBoard, resetGame, getCurrentTurn
     }
+})();
+
+const aiPlayer = (() => {
+    const game = gameBoard;
 })();
