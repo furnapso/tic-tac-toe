@@ -12,3 +12,6 @@ Assignment for [The Odin Project](https://www.theodinproject.com) - Tic-Tac-Toe
 * Icons by [Pixel perfect](https://www.flaticon.com/authors/pixel-perfect)
 * Icons by [Freepik](https://www.flaticon.com/authors/freepik)
 * Icons by [gorbachev](https://www.flaticon.com/authors/vitaly-gorbachev)
+
+## Screenshots
+![Tic-tac-toe screenshot](./images/screenshot.png)
