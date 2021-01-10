@@ -16,5 +16,5 @@ Assignment for [The Odin Project](https://www.theodinproject.com) - Tic-Tac-Toe
 ## Screenshots
 ![Tic-tac-toe screenshot](./images/screenshot.png)
 
-# Demo
+## Demo
 You can view a live demo [here](https://furnapso.github.io/tic-tac-toe/)
