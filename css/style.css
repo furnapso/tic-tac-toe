@@ -33,6 +33,7 @@
     --largest: 110px;  
 }
 
+/* Main page */
 body {
     background-color: var(--background-grey);
 }
@@ -41,13 +42,31 @@ main {
     max-width: 1440px;
     max-height: 900px;
     min-height: 700px;
+    min-width: 1200px;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: none;
 }
 
-.container {
+.column {
+    width: 33.33%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: var(--dark-grey);
+}
+
+.turn-identifier img {
+    height: 16px;
+}
+
+/* Game grid */
+.grid {
     height: 20em;
     width: 20em;
     display: flex;
@@ -65,8 +84,13 @@ main {
 .square {
     height: 100%;
     width: 33.33%;
-    transition: background-color 200ms;
+    transition: all 200ms;
     background-size: cover;
+}
+
+.square:hover {
+    background-color: var(--lightest-grey);
+    cursor: pointer;
 }
 
 .first-row, .second-row {
@@ -77,11 +101,7 @@ main {
     border-right: 2px solid var(--dark-grey);
 }
 
-.square:hover {
-    background-color: var(--lightest-grey);
-    cursor: pointer;
-}
-
+/* Symbols */
 .cross {
     background-image: url("../images/cross.svg");
 }
