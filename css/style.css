@@ -9,7 +9,7 @@
     --dark-grey: hsl(192, 10%, 20%);
     --grey: hsl(190, 20%, 30%);
     --light-grey: hsl(190, 10%, 50%);
-    --lightest-grey: hsl(190, 10%, 80%);
+    --lightest-grey: hsl(190, 10%, 90%);
 
     --background-grey: hsl(190, 10%, 95%);
 
@@ -80,11 +80,17 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 4px;
+    padding: 8px 16px 8px 16px;
+}
+
+.message-active {
+    border: 1px solid var(--dark-grey);
+    background-color: var(--lightest-grey);
+    opacity: 1;
 }
 
 .error-active {
-    border-radius: 4px;
-    padding: 8px 16px 8px 16px;
     border: 1px solid var(--dark-alert);
     background-color: var(--light-alert);
     opacity: 1;
