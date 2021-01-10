@@ -73,10 +73,13 @@ h1 {
     font-size: var(--larger-1);
 }
 
-.error {
-    height: 24px;
+.message {
+    min-height: 35px;
     opacity: 0;
-    transition: opacity 200ms;
+    transition: opacity 200ms linear;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .error-active {

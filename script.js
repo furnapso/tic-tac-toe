@@ -10,13 +10,25 @@ const userInterface = (() => {
         turnIdenfierImage["src"] = newTurnImageUrl;
     }
 
+    const raiseError = (error) => {
+        const messageDiv = document.querySelector("p.message");
+        messageDiv.textContent = error;
+        messageDiv.classList.add("error-active");
+        setTimeout(() => {
+            messageDiv.classList.remove("error-active");
+            setTimeout(() => {
+                messageDiv.textContent = "";
+            }, 200)
+        }, 4000)
+    }
+
     document.querySelector('#reset').addEventListener("click", event => {
         gameBoard.resetGame();
         updateTurnIdentifier();
     })
 
     return {
-        updateTurnIdentifier
+        updateTurnIdentifier, raiseError
     }
 })();
 
@@ -139,8 +151,7 @@ const gameBoard = (() => {
             let [y, x] = convertToCoordinates(index);
 
             if (board[y][x] != "") {
-                alert("Error");
-                // TODO: Throw error for clicking on existing space
+                userInterface.raiseError("Invalid selection");
             }
             else {
                 board[y][x] = currentTurn;
