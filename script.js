@@ -51,6 +51,8 @@ const gameBoard = (() => {
         ["","",""]
     ];
 
+    const getBoard = () => board
+
     const squares = document.querySelectorAll(".square");
 
     const convertFromCoordinates = (coordinates) => {
@@ -96,15 +98,16 @@ const gameBoard = (() => {
         userInterface.updateTurnIdentifier();
     }
 
-    const evaluateWinner = () => {
+    const evaluateWinner = (currentBoard) => {
+        currentBoard = (currentBoard || board);
         // Horizontal wins
-        for (let i = 0; i <board[0].length; i++) {
-            if (board[i].every(val => val == board[i][0] && board[i][0] != "")) return board[i][0];
+        for (let i = 0; i <currentBoard[0].length; i++) {
+            if (currentBoard[i].every(val => val == currentBoard[i][0] && currentBoard[i][0] != "")) return currentBoard[i][0];
         }
 
         // Vertical wins
-        for (let i = 0; i < board[0].length; i++) {
-            if (board[0][i] == board[1][i] && board[0][i] == board[2][i] && board[0][i] != "") return board[0][i]
+        for (let i = 0; i < currentBoard[0].length; i++) {
+            if (currentBoard[0][i] == currentBoard[1][i] && currentBoard[0][i] == currentBoard[2][i] && currentBoard[0][i] != "") return currentBoard[0][i]
         }
 
         // Diagonal wins
@@ -112,12 +115,12 @@ const gameBoard = (() => {
         let leftDiagonalCoordinates = [];
         let leftDiagonalResults = [];
 
-        for (let i = 0; i < board[0].length; i++) {
+        for (let i = 0; i < currentBoard[0].length; i++) {
             leftDiagonalCoordinates.push([i, i]);
         }
         
         leftDiagonalCoordinates.forEach(coord => {
-            leftDiagonalResults.push(board[coord[0]][coord[1]]);
+            leftDiagonalResults.push(currentBoard[coord[0]][coord[1]]);
         })
 
         if (leftDiagonalResults.every(val => (val === leftDiagonalResults[0] && leftDiagonalResults[0] != ""))) {
@@ -128,14 +131,14 @@ const gameBoard = (() => {
         let rightDiagonalCoordinates = [];
         let rightDiagonalResults = [];
 
-        for (let i = 0, j = board[0].length; i < board[0].length; i++, j--) {
+        for (let i = 0, j = currentBoard[0].length; i < currentBoard[0].length; i++, j--) {
             rightDiagonalCoordinates.push(
                 [i, j - 1]
             )
         }
 
         rightDiagonalCoordinates.forEach(coord => {
-            rightDiagonalResults.push(board[coord[0]][coord[1]]);
+            rightDiagonalResults.push(currentBoard[coord[0]][coord[1]]);
         })
 
         if (rightDiagonalResults.every(val => (val === rightDiagonalResults[0] && rightDiagonalResults[0] != ""))) {
@@ -143,7 +146,7 @@ const gameBoard = (() => {
         }
 
         // Tie
-        if (board.every(row => {
+        if (currentBoard.every(row => {
             return row.every(square => {
                 return square != "";
             })
@@ -199,10 +202,22 @@ const gameBoard = (() => {
     })
 
     return {
-        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn
+        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, getBoard
     }
 })();
 
 const aiPlayer = (() => {
     const game = gameBoard;
+    
+    const getAvailableMoves = (board) => {
+        board = (board || gameBoard.getBoard());
+        
+        let availableMoves = [];
+
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board.length; j++) {
+                
+            }
+        }
+    }
 })();
