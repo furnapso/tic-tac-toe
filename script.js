@@ -58,7 +58,7 @@ const userInterface = (() => {
     })
 
     return {
-        updateTurnIdentifier, showMessage, changeGameType
+        updateTurnIdentifier, showMessage
     }
 })();
 
