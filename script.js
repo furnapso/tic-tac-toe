@@ -100,6 +100,7 @@ const gameBoard = (() => {
 
     const evaluateWinner = (currentBoard) => {
         currentBoard = (currentBoard || board);
+
         // Horizontal wins
         for (let i = 0; i <currentBoard[0].length; i++) {
             if (currentBoard[i].every(val => val == currentBoard[i][0] && currentBoard[i][0] != "")) return currentBoard[i][0];
@@ -216,10 +217,22 @@ const aiPlayer = (() => {
 
         for (let i = 0; i < board.length; i++) {
             for (let j = 0; j < board.length; j++) {
-                if (board[i][j] != "") availableMoves.push([i, j]);
+                if (board[i][j] == "") availableMoves.push([i, j]);
             }
         }
 
         return availableMoves;
+    }
+
+    const getRandomMove = (board) => {
+        board = (board || gameBoard.getBoard());
+
+        const moves = getAvailableMoves();
+
+        return moves[Math.floor(Math.random * (moves.length - 1))];
+    }
+
+    return {
+        getAvailableMoves
     }
 })();
