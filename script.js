@@ -7,10 +7,9 @@ function toProperCase(string) {
     return strSplit.join(" ");
 }
 
-const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 const userInterface = (() => {
     const turnIdentifier = document.querySelector(".turn-identifier");
+    const gameType = document.querySelector(".game-type");
 
     const updateTurnIdentifier = () => {
         const turnIdenfierImage = turnIdentifier.querySelector("img")
@@ -36,13 +35,30 @@ const userInterface = (() => {
         }, 4000)
     }
 
+    const changeGameType = (newGameType) => {
+        const currentGameType = gameType.textContent;
+        if (newGameType == undefined) {
+            gameType.textContent = currentGameType == "Player vs. Player" ? "Player vs. AI" : "Player vs. Player";
+        }
+        else {
+            gameType.textContent = newGameType;
+        }
+
+        gameBoard.resetGame();
+    }
+
     document.querySelector('#reset').addEventListener("click", event => {
         gameBoard.resetGame();
         updateTurnIdentifier();
     })
 
+    document.querySelector("#change-game-type").addEventListener('click', event => {
+        changeGameType();
+        gameBoard.toggleAi();
+    })
+
     return {
-        updateTurnIdentifier, showMessage
+        updateTurnIdentifier, showMessage, changeGameType
     }
 })();
 
@@ -53,7 +69,13 @@ const gameBoard = (() => {
         ["","",""]
     ];
 
-    let aiIsPlaying = true;
+    let aiIsPlaying = false;
+
+    const toggleAi = (bool) => {
+        bool = (bool || !aiIsPlaying);
+
+        aiIsPlaying = bool;
+    }
 
     const getBoard = () => board
 
@@ -209,7 +231,7 @@ const gameBoard = (() => {
     })
 
     return {
-        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, getBoard, convertFromCoordinates
+        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, getBoard, convertFromCoordinates, toggleAi
     }
 })();
 
