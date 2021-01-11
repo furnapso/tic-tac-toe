@@ -7,6 +7,8 @@ function toProperCase(string) {
     return strSplit.join(" ");
 }
 
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const userInterface = (() => {
     const turnIdentifier = document.querySelector(".turn-identifier");
 
@@ -50,6 +52,8 @@ const gameBoard = (() => {
         ["","",""],
         ["","",""]
     ];
+
+    let aiIsPlaying = true;
 
     const getBoard = () => board
 
@@ -199,16 +203,19 @@ const gameBoard = (() => {
 
                 resetGame();
             }
+
+            if (aiIsPlaying && currentTurn == "naught") aiPlayer.play();
         })
     })
 
     return {
-        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, getBoard
+        drawBoard, evaluateWinner, clearBoard, resetGame, getCurrentTurn, getBoard, convertFromCoordinates
     }
 })();
 
 const aiPlayer = (() => {
     const game = gameBoard;
+    let playing = false;
     
     const getAvailableMoves = (board) => {
         board = (board || gameBoard.getBoard());
@@ -229,10 +236,19 @@ const aiPlayer = (() => {
 
         const moves = getAvailableMoves();
 
-        return moves[Math.floor(Math.random * (moves.length - 1))];
+        return moves[Math.floor(Math.random() * (moves.length - 1))];
+    }
+
+    const play = () => {
+        let move = getRandomMove();
+        let index = gameBoard.convertFromCoordinates(move);
+
+        setTimeout(() => {
+            document.querySelectorAll(".square")[index].click()
+        }, 300);
     }
 
     return {
-        getAvailableMoves
+        getAvailableMoves, play
     }
 })();
