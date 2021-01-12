@@ -7,6 +7,10 @@ function toProperCase(string) {
     return strSplit.join(" ");
 }
 
+function makeCopy(obj) {
+    return JSON.parse(JSON.stringify(obj))
+}
+
 const userInterface = (() => {
     const turnIdentifier = document.querySelector(".turn-identifier");
     const gameType = document.querySelector(".game-type");
@@ -278,64 +282,26 @@ const aiPlayer = (() => {
     }
     
     const miniMax = (board, depth, isMaximizing) => {
-        let winner = gameBoard.evaluateWinner(board);
-
-        if (winner != undefined) {
-            return miniMaxWinnerScores[winner];
-        }
-
-        if (isMaximizing) {
-            let bestScore = -Infinity;
-            let moves = getAvailableMoves(board);
-            moves.forEach(move => {
-                let [y, x] = move;
-                const newBoard = Array.from(board);
-                newBoard[y][x] = "cross";
-                let score = miniMax(newBoard, depth + 1, false);
-                bestScore = Math.max(score, bestScore);
-            })
-
-            return bestScore
-        }
-
-        else {
-            let bestScore = Infinity;
-            let moves = getAvailableMoves(board);
-            moves.forEach(move => {
-                let [y, x] = move;
-                const newBoard = Array.from(board);
-                newBoard[y][x] = "naught";
-                let score = miniMax(newBoard, depth + 1, true);
-                bestScore = Math.min(score, bestScore);
-            })
-
-            return bestScore;
-        }
+        return 1
     }
     
-    const bestMove = (board) => {
+    const getBestMove = (board) => {
         let bestScore = -Infinity;
-        let bestMove;
-        let moves = getAvailableMoves(board);
-
-        moves.forEach(move => {
-            let [y, x] = move;
-            const newBoard = Array.from(board);
-            console.log("Original board")
-            console.table(newBoard);
+        let moves = getAvailableMoves(gameBoard.getBoard());
+        
+        for (let i = 0; i < moves.length; i++) {
+            let [y, x] = moves[i];
+            let newBoard = makeCopy(board);
             newBoard[y][x] = "naught";
-            console.log("Proposed next move")
-            console.table(newBoard);
-            // let score = miniMax(board, depth + 1, (maximizingPlayer ? false : true), (player == "cross" ? "naught" : "cross"));
-            let score = miniMax(newBoard, 0, true);
+            let score = miniMax(board, 0, true);
 
             if (score > bestScore) {
                 bestScore = score;
-                bestMove = move;
+                bestMove = moves[i];
             }
-        });
+        }
 
-        return bestMove;
+        return bestMove
     }
     
     return {
